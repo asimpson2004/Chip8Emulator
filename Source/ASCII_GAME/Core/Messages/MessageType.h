@@ -1,0 +1,14 @@
+#ifndef _MESSAGE_TYPE_H_
+#define _MESSAGE_TYPE_H_
+
+enum class E_MESSAGE_TYPE
+{
+	SET_SPRITE_RECT,
+	SET_SPRITE_TEXTURE,
+
+	MENU_ITEM_SELECTED,
+
+	MESSAGE_TYPE_MAX,
+};
+
+#endif

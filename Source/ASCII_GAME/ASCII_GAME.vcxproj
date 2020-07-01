@@ -1,0 +1,225 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{CC3A4598-50CB-4AB8-9342-80ABA43869CB}</ProjectGuid>
+    <RootNamespace>ASCII_GAME</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup />
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>../../Libraries/tinyxml2</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>tinyxml2-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>../../Libraries/tinyxml2/lib</AdditionalLibraryDirectories>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>../../Libraries/tinyxml2</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalLibraryDirectories>../../Libraries/tinyxml2/lib</AdditionalLibraryDirectories>
+      <AdditionalDependencies>tinyxml2.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="Core\Assets\AssetManager.cpp" />
+    <ClCompile Include="Core\Assets\TargaFile.cpp" />
+    <ClCompile Include="Core\Components\Component.cpp" />
+    <ClCompile Include="Core\Components\ComponentFactory.cpp" />
+    <ClCompile Include="Core\Components\ComponentManager.cpp" />
+    <ClCompile Include="Core\Components\Graphics\AnimatorComponent.cpp" />
+    <ClCompile Include="Core\Components\Graphics\SpriteComponent.cpp" />
+    <ClCompile Include="Core\Components\Physics\BoxColliderComponent.cpp" />
+    <ClCompile Include="Core\Components\UI\FileListMenuComponent.cpp" />
+    <ClCompile Include="Core\Components\UI\ListMenuComponent.cpp" />
+    <ClCompile Include="Core\Components\UI\TextComponent.cpp" />
+    <ClCompile Include="Core\GameDatabase\CreationData\AnimatorControllerCreate.cpp" />
+    <ClCompile Include="Core\GameDatabase\CreationData\ComponentCreate.cpp" />
+    <ClCompile Include="Core\GameDatabase\CreationData\GameObjectCreate.cpp" />
+    <ClCompile Include="Core\GameDatabase\CreationData\SpriteComponentCreate.cpp" />
+    <ClCompile Include="Core\GameDatabase\CreationData\UI\FileListMenuComponentCreate.cpp" />
+    <ClCompile Include="Core\GameDatabase\CreationData\UI\ListMenuComponentCreate.cpp" />
+    <ClCompile Include="Core\GameDatabase\CreationData\UI\TextComponentCreate.cpp" />
+    <ClCompile Include="Core\GameDatabase\DatabaseTypes.cpp" />
+    <ClCompile Include="Core\GameDatabase\Factory\Factory.cpp" />
+    <ClCompile Include="Core\GameDatabase\GameDatabaseManager.cpp" />
+    <ClCompile Include="Core\GameDatabase\GameDataTest.cpp" />
+    <ClCompile Include="Core\GameDatabase\PaksList.cpp" />
+    <ClCompile Include="Core\GameDatabase\ProjectSettings.cpp" />
+    <ClCompile Include="Core\GameDatabase\Vector2D.cpp" />
+    <ClCompile Include="Core\GameObject\GameObject.cpp" />
+    <ClCompile Include="Core\GameObject\GameObjectFactory.cpp" />
+    <ClCompile Include="Core\GameObject\GameObjectManager.cpp" />
+    <ClCompile Include="Core\GameState\GameState.cpp" />
+    <ClCompile Include="Core\GameState\GameStateManager.cpp" />
+    <ClCompile Include="Core\Input\InputManager.cpp" />
+    <ClCompile Include="Core\Maths\Matrix4x4.cpp" />
+    <ClCompile Include="Core\Maths\Rect.cpp" />
+    <ClCompile Include="Core\Maths\Vector2.cpp" />
+    <ClCompile Include="Core\Maths\Vector3.cpp" />
+    <ClCompile Include="Core\Messages\MessageManager.cpp" />
+    <ClCompile Include="Core\Platform\Endian.cpp" />
+    <ClCompile Include="Core\Platform\File.cpp" />
+    <ClCompile Include="Core\Platform\IO\File_Win32.cpp" />
+    <ClCompile Include="Core\Renderer\ASCIIRenderer.cpp" />
+    <ClCompile Include="Core\Renderer\AsciiTexture.cpp" />
+    <ClCompile Include="Core\Utils\Types.cpp" />
+    <ClCompile Include="Game\Components\Chip8EmulatorComponent.cpp" />
+    <ClCompile Include="Game\Components\ComponentFactoryImpl.cpp" />
+    <ClCompile Include="Game\Components\UI\Chip8GameStateLauncherComponent.cpp" />
+    <ClCompile Include="Game\Components\UI\PauseMenuControllerComponent.cpp" />
+    <ClCompile Include="Game\Game.cpp" />
+    <ClCompile Include="Game\GameData\GameDatabase\CreationData\Chip8EmulatorComponentCreate.cpp" />
+    <ClCompile Include="Game\GameData\GameDatabase\CreationData\GameStates\Chip8EmulatorGameStateCreate.cpp" />
+    <ClCompile Include="Game\GameData\GameDatabase\CreationData\UI\Chip8GameStateLauncherComponentCreate.cpp" />
+    <ClCompile Include="Game\GameData\GameDatabase\CreationData\UI\PauseMenuControllerComponentCreate.cpp" />
+    <ClCompile Include="Game\GameData\GameDatabase\GameDatabase.cpp" />
+    <ClCompile Include="Game\GameObjects\GameObjectFactoryImpl.cpp" />
+    <ClCompile Include="Game\GameStates\Chip8EmulatorGameState.cpp" />
+    <ClCompile Include="Game\GameStates\GameStateFactoryImpl.cpp" />
+    <ClCompile Include="Game\GameStates\MainMenu.cpp" />
+    <ClCompile Include="Game\GameStates\TestGameState.cpp" />
+    <ClCompile Include="Game\Input\KeyboardAndMouseInputDevice.cpp" />
+    <ClCompile Include="Main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Core\Assets\AssetManager.h" />
+    <ClInclude Include="Core\Assets\ImageFile.h" />
+    <ClInclude Include="Core\Assets\SpritesheetDef.h" />
+    <ClInclude Include="Core\Assets\TargaFile.h" />
+    <ClInclude Include="Core\Components\Component.h" />
+    <ClInclude Include="Core\Components\ComponentFactory.h" />
+    <ClInclude Include="Core\Components\ComponentManager.h" />
+    <ClInclude Include="Core\Components\ComponentType.h" />
+    <ClInclude Include="Core\Components\Graphics\AnimatorComponent.h" />
+    <ClInclude Include="Core\Components\Graphics\SpriteComponent.h" />
+    <ClInclude Include="Core\Components\Physics\BoxColliderComponent.h" />
+    <ClInclude Include="Core\Components\UI\FileListMenuComponent.h" />
+    <ClInclude Include="Core\Components\UI\ListMenuComponent.h" />
+    <ClInclude Include="Core\Components\UI\TextComponent.h" />
+    <ClInclude Include="Core\GameDatabase\CreationData\AnimatorComponentCreate.h" />
+    <ClInclude Include="Core\GameDatabase\CreationData\BoxColliderComponentCreate.h" />
+    <ClInclude Include="Core\GameDatabase\CreationData\ComponentCreate.h" />
+    <ClInclude Include="Core\GameDatabase\CreationData\GameObjectCreate.h" />
+    <ClInclude Include="Core\GameDatabase\CreationData\GameStateCreate.h" />
+    <ClInclude Include="Core\GameDatabase\CreationData\SpriteComponentCreate.h" />
+    <ClInclude Include="Core\GameDatabase\CreationData\UI\FileListMenuComponentCreate.h" />
+    <ClInclude Include="Core\GameDatabase\CreationData\UI\ListMenuComponentCreate.h" />
+    <ClInclude Include="Core\GameDatabase\CreationData\UI\TextAlignmentType.h" />
+    <ClInclude Include="Core\GameDatabase\CreationData\UI\TextComponentCreate.h" />
+    <ClInclude Include="Core\GameDatabase\DatabaseTypes.h" />
+    <ClInclude Include="Core\GameDatabase\Factory\Factory.h" />
+    <ClInclude Include="Core\GameDatabase\Factory\FactoryHelpers.h" />
+    <ClInclude Include="Core\GameDatabase\GameDatabaseManager.h" />
+    <ClInclude Include="Core\GameDatabase\GameDataHelpers.h" />
+    <ClInclude Include="Core\GameDatabase\GameDataTest.h" />
+    <ClInclude Include="Core\GameDatabase\PaksList.h" />
+    <ClInclude Include="Core\GameDatabase\ProjectSettings.h" />
+    <ClInclude Include="Core\GameDatabase\Vector2D.h" />
+    <ClInclude Include="Core\GameObject\GameObject.h" />
+    <ClInclude Include="Core\GameObject\GameObjectFactory.h" />
+    <ClInclude Include="Core\GameObject\GameObjectManager.h" />
+    <ClInclude Include="Core\GameState\GameState.h" />
+    <ClInclude Include="Core\GameState\GameStateFactory.h" />
+    <ClInclude Include="Core\GameState\GameStateManager.h" />
+    <ClInclude Include="Core\Input\InputDevice.h" />
+    <ClInclude Include="Core\Input\InputManager.h" />
+    <ClInclude Include="Core\Maths\MathHelpers.h" />
+    <ClInclude Include="Core\Maths\Matrix4x4.h" />
+    <ClInclude Include="Core\Maths\Rect.h" />
+    <ClInclude Include="Core\Maths\Vector2.h" />
+    <ClInclude Include="Core\Maths\Vector3.h" />
+    <ClInclude Include="Core\Messages\MenuItemSelectedMessage.h" />
+    <ClInclude Include="Core\Messages\Message.h" />
+    <ClInclude Include="Core\Messages\MessageHandler.h" />
+    <ClInclude Include="Core\Messages\MessageManager.h" />
+    <ClInclude Include="Core\Messages\MessageType.h" />
+    <ClInclude Include="Core\Messages\SetSpriteRectMessage.h" />
+    <ClInclude Include="Core\Messages\SetSpriteTextureMessage.h" />
+    <ClInclude Include="Core\Platform\Endian.h" />
+    <ClInclude Include="Core\Platform\File.h" />
+    <ClInclude Include="Core\Platform\IO\File.h" />
+    <ClInclude Include="Core\Renderer\ASCIIRenderer.h" />
+    <ClInclude Include="Core\Renderer\AsciiRendererInterface.h" />
+    <ClInclude Include="Core\Renderer\AsciiTexture.h" />
+    <ClInclude Include="Core\Renderer\ConsoleColours.h" />
+    <ClInclude Include="Core\Utils\Types.h" />
+    <ClInclude Include="Core\Utils\Utils.h" />
+    <ClInclude Include="Game\Components\Chip8EmulatorComponent.h" />
+    <ClInclude Include="Game\Components\ComponentFactoryImpl.h" />
+    <ClInclude Include="Game\Components\GameComponentType.h" />
+    <ClInclude Include="Game\Components\UI\Chip8GameStateLauncherComponent.h" />
+    <ClInclude Include="Game\Components\UI\PauseMenuControllerComponent.h" />
+    <ClInclude Include="Game\Game.h" />
+    <ClInclude Include="Game\GameData\GameDatabase\CreationData\Chip8EmulatorComponentCreate.h" />
+    <ClInclude Include="Game\GameData\GameDatabase\CreationData\GameStates\Chip8EmulatorGameStateCreate.h" />
+    <ClInclude Include="Game\GameData\GameDatabase\CreationData\MainMenuGameStateCreate.h" />
+    <ClInclude Include="Game\GameData\GameDatabase\CreationData\TestGameStateCreationData.h" />
+    <ClInclude Include="Game\GameData\GameDatabase\CreationData\UI\Chip8GameStateLauncherComponentCreate.h" />
+    <ClInclude Include="Game\GameData\GameDatabase\CreationData\UI\PauseMenuControllerComponentCreate.h" />
+    <ClInclude Include="Game\GameData\GameDatabase\GameDatabase.h" />
+    <ClInclude Include="Game\GameObjects\GameObjectFactoryImpl.h" />
+    <ClInclude Include="Game\GameStates.h" />
+    <ClInclude Include="Game\GameStates\Chip8EmulatorGameState.h" />
+    <ClInclude Include="Game\GameStates\GameStateFactoryImpl.h" />
+    <ClInclude Include="Game\GameStates\GameStateType.h" />
+    <ClInclude Include="Game\GameStates\MainMenu.h" />
+    <ClInclude Include="Game\GameStates\TestGameState.h" />
+    <ClInclude Include="Game\Input\KeyboardAndMouseInputDevice.h" />
+    <ClInclude Include="Game\Messages\GameMessageType.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

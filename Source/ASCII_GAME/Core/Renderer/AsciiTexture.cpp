@@ -1,0 +1,615 @@
+#include "AsciiTexture.h"
+#include "../Utils/Utils.h"
+#include "../Assets/ImageFile.h"
+#include "../Renderer/ConsoleColours.h"
+#include "../Maths/Vector3.h"
+
+static const unsigned short ansiColours[] = {
+
+	BACKGROUND_BLACK, // 0 0 0 
+	BACKGROUND_WHITE, //255,255,255
+	BACKGROUND_BLUE, //0,0,128
+	BACKGROUND_BRIGHT_BLUE, //0,0,255
+	BACKGROUND_GREEN, //0,128,0
+	BACKGROUND_TURQOISE, //0,128,128
+	BACKGROUND_BRIGHT_GREEN, //0,255,0
+	BACKGROUND_SKYBLUE, //0,255,255
+	BACKGROUND_RED, //128,0,0
+	BACKGROUND_PURPLE, //128,0,128
+	BACKGROUND_MUSTARD, //128,128,0
+	BACKGROUND_DARK_GREY, //128,128,128
+	BACKGROUND_GREY, //192,192,192
+	BACKGROUND_BRIGHT_RED, //255,0,0
+	BACKGROUND_PINK, //255,0,255
+	BACKGROUND_YELLOW, //255,255,0
+	//16
+	BACKGROUND_BRIGHT_BLUE | FOREGROUND_TURQOISE, //low density //0,64,255
+	BACKGROUND_BRIGHT_GREEN | FOREGROUND_TURQOISE, //low density //0,255,64
+	BACKGROUND_BRIGHT_BLUE | FOREGROUND_BRIGHT_RED, //low density //64,0,255
+	BACKGROUND_BRIGHT_GREEN | FOREGROUND_RED, // low//64,192,0
+
+	BACKGROUND_SKYBLUE | FOREGROUND_BRIGHT_GREEN, //low //64,192,128
+	BACKGROUND_BRIGHT_GREEN | FOREGROUND_RED, //low //64,255,0
+	BACKGROUND_BRIGHT_GREEN | FOREGROUND_DARK_GREY, // low //64,255,64
+	BACKGROUND_SKYBLUE | FOREGROUND_RED, //low density //64,255,255
+
+	BACKGROUND_RED | FOREGROUND_PURPLE, // low //128,0,64
+	BACKGROUND_PURPLE | FOREGROUND_BRIGHT_BLUE, // low//128,0,192
+	BACKGROUND_PURPLE | FOREGROUND_GREY, //low //128,64,192
+	BACKGROUND_DARK_GREY | FOREGROUND_PURPLE, // low //128,128,192
+
+	BACKGROUND_WHITE | FOREGROUND_PURPLE, //low density //192,192,255
+	BACKGROUND_BRIGHT_RED| FOREGROUND_BLUE, //low density//255,0,64
+	BACKGROUND_BRIGHT_RED| FOREGROUND_GREEN, //low density//255,64,0
+	BACKGROUND_BRIGHT_RED| FOREGROUND_DARK_GREY, //low density //255,64,64
+
+	BACKGROUND_PINK | FOREGROUND_MUSTARD, //low //255,64,192
+	BACKGROUND_PINK | FOREGROUND_GREEN, //low density//255,64,255
+	BACKGROUND_YELLOW | FOREGROUND_WHITE, //low density//255,255,64
+	BACKGROUND_YELLOW | FOREGROUND_BRIGHT_GREEN, //low density //192,255,64
+
+	//36
+	BACKGROUND_BLACK | FOREGROUND_BLUE, //medium density //0,0,64
+	BACKGROUND_BLUE | FOREGROUND_BRIGHT_BLUE, //medium density //0,0,192
+	BACKGROUND_BLACK | FOREGROUND_GREEN,//medium density //0,64,0
+	BACKGROUND_BLACK | FOREGROUND_TURQOISE, //medium density //0,64,64
+
+	BACKGROUND_BLUE | FOREGROUND_GREEN, //medium density //0,64,128
+	BACKGROUND_BRIGHT_BLUE | FOREGROUND_TURQOISE, //medium density //0,64,192
+	BACKGROUND_GREEN | FOREGROUND_BLUE, //medium //0,128,64
+	BACKGROUND_BRIGHT_BLUE| FOREGROUND_SKYBLUE, //medium //0,128,192
+
+	BACKGROUND_TURQOISE | FOREGROUND_BRIGHT_BLUE, //medium density //0,128,255
+	BACKGROUND_GREEN | FOREGROUND_BRIGHT_GREEN, // medium density //0,192,0
+	BACKGROUND_GREEN | BACKGROUND_BLUE | FOREGROUND_BRIGHT_GREEN, //medium density //0,192,64
+	BACKGROUND_GREEN | BACKGROUND_BLUE | FOREGROUND_BRIGHT_GREEN, //medium density //0,192,128
+
+	BACKGROUND_TURQOISE | FOREGROUND_SKYBLUE, //medium //0,192,192
+	BACKGROUND_SKYBLUE | FOREGROUND_BRIGHT_BLUE, // medium density //0,192,255
+	BACKGROUND_BRIGHT_GREEN | FOREGROUND_TURQOISE, //medium density //0,255,128
+	BACKGROUND_SKYBLUE | FOREGROUND_BRIGHT_GREEN, //medium density //0,255,192
+
+	BACKGROUND_BLACK | FOREGROUND_RED, //medium density //64,0,0
+	BACKGROUND_BLACK | FOREGROUND_PURPLE, //medium density //64,0,64
+	BACKGROUND_BLUE | FOREGROUND_PURPLE, //medium density //64,0,128
+	BACKGROUND_BRIGHT_BLUE | FOREGROUND_PURPLE, //medium density 64,0,192
+
+	BACKGROUND_BLACK | FOREGROUND_MUSTARD, // medium 64,64,0
+	BACKGROUND_BLACK | FOREGROUND_DARK_GREY, //medium //64,64,64
+	BACKGROUND_BLUE | FOREGROUND_MUSTARD, // medium density//64,64,128
+	BACKGROUND_BRIGHT_BLUE | FOREGROUND_MUSTARD, // medium density 64,64,192
+
+	BACKGROUND_BRIGHT_BLUE | FOREGROUND_PURPLE, //medium //64,64,255
+	BACKGROUND_GREEN | FOREGROUND_MUSTARD, //medium //64,128,0
+	BACKGROUND_GREEN | FOREGROUND_DARK_GREY, //medium //64,128,64
+	BACKGROUND_TURQOISE | FOREGROUND_GREY, // medium//64,128,128
+
+	BACKGROUND_TURQOISE | FOREGROUND_BLUE, // medium //64,128,192
+	BACKGROUND_BRIGHT_BLUE | FOREGROUND_SKYBLUE, // medium //64,128,255
+	BACKGROUND_BRIGHT_GREEN | FOREGROUND_GREY, // medium //64,192,64
+	BACKGROUND_SKYBLUE | FOREGROUND_TURQOISE, // medium //64,192,192
+
+	BACKGROUND_SKYBLUE | FOREGROUND_BRIGHT_BLUE, //medium //64,192,255
+	BACKGROUND_BRIGHT_GREEN | FOREGROUND_SKYBLUE, // medium//64,255,128
+	BACKGROUND_SKYBLUE | FOREGROUND_BRIGHT_GREEN, //medium //64,255,192
+	BACKGROUND_PURPLE | FOREGROUND_BRIGHT_BLUE, //medium //128,0,255
+
+	BACKGROUND_RED | FOREGROUND_MUSTARD, //medium //128,64,0
+	BACKGROUND_RED | FOREGROUND_DARK_GREY, //medium //128,64,64
+	BACKGROUND_PURPLE | FOREGROUND_GREY, // medium//128,64,128
+	BACKGROUND_PURPLE | FOREGROUND_BRIGHT_BLUE, // medium//128,64,255
+
+	BACKGROUND_MUSTARD | FOREGROUND_DARK_GREY, // medium //128,128,64
+	BACKGROUND_PURPLE | FOREGROUND_WHITE, //medium//128,128,255
+	BACKGROUND_MUSTARD | FOREGROUND_GREEN, // medium//128,192,0
+	BACKGROUND_MUSTARD | FOREGROUND_GREEN | FOREGROUND_BLUE, // medium//128,192,64
+
+	BACKGROUND_GREEN | FOREGROUND_GREY, //medium//128,192,128
+	BACKGROUND_SKYBLUE | FOREGROUND_RED,// medium //128,192,192
+	BACKGROUND_SKYBLUE | FOREGROUND_BLUE,// medium  //128,192,255
+	BACKGROUND_BRIGHT_GREEN | FOREGROUND_MUSTARD, //medium //128,255,0
+
+	BACKGROUND_BRIGHT_GREEN | FOREGROUND_GREY, // medium //128,255,64
+	BACKGROUND_BRIGHT_GREEN | FOREGROUND_WHITE, //medium //128,255,128
+	BACKGROUND_SKYBLUE | FOREGROUND_TURQOISE, //medium //128,255,192
+	BACKGROUND_SKYBLUE | FOREGROUND_RED, //medium density //128,255,255
+
+	BACKGROUND_RED | FOREGROUND_BRIGHT_RED, //medium density //192,0,0
+	BACKGROUND_BRIGHT_RED | FOREGROUND_BLUE, //medium density //192,0,64
+	BACKGROUND_RED | FOREGROUND_PINK, //medium //192,0,128
+	BACKGROUND_PURPLE | FOREGROUND_PINK, //medium //192,0,192
+
+	BACKGROUND_PINK | FOREGROUND_BRIGHT_BLUE, //medium//192,0,255
+	BACKGROUND_BRIGHT_RED | FOREGROUND_MUSTARD, //medium //192,64,0
+	BACKGROUND_BRIGHT_RED | FOREGROUND_DARK_GREY, //medium//192,64,64
+	BACKGROUND_BRIGHT_RED | FOREGROUND_PINK, //medium //192,64,128
+
+	BACKGROUND_PINK | FOREGROUND_PURPLE, //medium //192,64,192
+	BACKGROUND_PURPLE | FOREGROUND_PINK, //medium //192,64,255
+	BACKGROUND_MUSTARD | FOREGROUND_BRIGHT_RED, //medium //192,128,0
+	BACKGROUND_MUSTARD | FOREGROUND_BRIGHT_RED, //medium//192,128,64
+
+	BACKGROUND_BRIGHT_RED | FOREGROUND_GREY, //medium //192,128,128
+	BACKGROUND_PURPLE | FOREGROUND_WHITE, //medium //192,128,192
+	BACKGROUND_PURPLE | FOREGROUND_PINK, // medium //192,128,255
+	BACKGROUND_MUSTARD | FOREGROUND_YELLOW, //medium //192,192,0
+
+	BACKGROUND_MUSTARD | FOREGROUND_YELLOW, // medium //192,192,64
+	BACKGROUND_MUSTARD | FOREGROUND_WHITE, //medium//192,192,128
+	BACKGROUND_YELLOW | FOREGROUND_BRIGHT_GREEN, //medium density //192,255,0
+	BACKGROUND_YELLOW | FOREGROUND_WHITE, //medium//192,255,128
+
+	BACKGROUND_BRIGHT_GREEN | FOREGROUND_WHITE, //medium density //192,255,192
+	BACKGROUND_WHITE | FOREGROUND_SKYBLUE, //medium density //192,255,255
+	BACKGROUND_BRIGHT_RED | FOREGROUND_PINK, //medium//255,0,128
+	BACKGROUND_PINK | FOREGROUND_BRIGHT_RED, //medium //255,0,192
+
+	BACKGROUND_PINK | FOREGROUND_MUSTARD, //medium //255,64,128
+	BACKGROUND_BRIGHT_RED | FOREGROUND_YELLOW, //medium //255,128,0 //BACKGROUND_BRIGHT_RED | FOREGROUND_MUSTARD
+	BACKGROUND_BRIGHT_RED | FOREGROUND_YELLOW, //medium density //255,128,64
+	BACKGROUND_BRIGHT_RED | FOREGROUND_WHITE, //medium density//255,128,128
+
+	BACKGROUND_PURPLE | FOREGROUND_WHITE, // medium//255,128,192
+	BACKGROUND_PURPLE | FOREGROUND_WHITE, //medium density //255,128,255
+	BACKGROUND_YELLOW | FOREGROUND_BRIGHT_RED, //medium //255,192,0
+	BACKGROUND_YELLOW | FOREGROUND_BRIGHT_RED, //medium//255,192,64
+
+	BACKGROUND_MUSTARD | FOREGROUND_WHITE, //medium //255,192,128
+	BACKGROUND_BRIGHT_RED | FOREGROUND_WHITE, //medium density //255,192,192
+	BACKGROUND_WHITE | FOREGROUND_PINK, //medium density //255,192,255
+	BACKGROUND_YELLOW | FOREGROUND_WHITE, //medium density //255,255,128
+
+	BACKGROUND_WHITE | FOREGROUND_YELLOW, //medium density  //255,255,192
+
+/*
+BACKGROUND_BRIGHT_RED, //255 0 0     
+BACKGROUND_BRIGHT_GREEN, // 0 255 0
+BACKGROUND_BRIGHT_BLUE, // 0 0 255
+BACKGROUND_TURQOISE, // 0 128 128
+BACKGROUND_SKYBLUE, // 0 255 255
+BACKGROUND_PURPLE, // 128 0 128
+BACKGROUND_PINK, // 255 0 255
+BACKGROUND_MUSTARD, // 128 128 0
+BACKGROUND_YELLOW, // 255 255 0
+BACKGROUND_WHITE, // 255 255 255
+BACKGROUND_GREY, // 192 192 192
+BACKGROUND_DARK_GREY, // 128 128 128
+BACKGROUND_RED, // 128 0 0
+BACKGROUND_GREEN, // 0 128 0
+BACKGROUND_BLUE, // 0 0 128
+BACKGROUND_BLACK, // 0 0 0 
+
+BACKGROUND_BLACK | FOREGROUND_RED, // 64 0 0 
+BACKGROUND_BLACK | FOREGROUND_BLUE, // 0 64 0 
+BACKGROUND_BLACK | FOREGROUND_GREEN, // 0 0 64 
+
+BACKGROUND_BLACK | FOREGROUND_TURQOISE, // 0 64 64 
+BACKGROUND_BLACK | FOREGROUND_PURPLE, // 64 0 64
+BACKGROUND_BLACK | FOREGROUND_MUSTARD, // 64 64 0
+
+BACKGROUND_BLACK | FOREGROUND_DARK_GREY, // 64 64 64
+
+BACKGROUND_RED | FOREGROUND_BRIGHT_RED, // 192 0 0 
+BACKGROUND_GREEN | FOREGROUND_BRIGHT_GREEN, // 0 192 0
+BACKGROUND_BLUE | FOREGROUND_BRIGHT_BLUE, // 0 0 192
+
+BACKGROUND_TURQOISE | FOREGROUND_SKYBLUE, // 0 192 192  
+BACKGROUND_PURPLE| FOREGROUND_PINK, // 192 0 192
+BACKGROUND_MUSTARD | FOREGROUND_YELLOW, // 192 192 0
+
+BACKGROUND_RED | FOREGROUND_MUSTARD, // 128 64 0
+BACKGROUND_RED | FOREGROUND_PURPLE, // 128 0 64
+
+BACKGROUND_GREEN | FOREGROUND_TURQOISE, // 0 128 64
+BACKGROUND_GREEN | FOREGROUND_MUSTARD, // 64 128 0
+
+BACKGROUND_BLUE | FOREGROUND_TURQOISE, // 0 64 128
+BACKGROUND_BLUE | FOREGROUND_PURPLE, // 64 0 128
+
+BACKGROUND_BRIGHT_RED | FOREGROUND_MUSTARD, // 255 128 0
+BACKGROUND_BRIGHT_RED | FOREGROUND_PURPLE, // 255 0 128
+
+BACKGROUND_BRIGHT_GREEN | FOREGROUND_TURQOISE, // 0 255 128
+BACKGROUND_BRIGHT_GREEN | FOREGROUND_MUSTARD, // 128 255 0
+
+BACKGROUND_BRIGHT_BLUE | FOREGROUND_TURQOISE, // 0 128 255
+BACKGROUND_BRIGHT_BLUE | FOREGROUND_PURPLE, // 128 0 255
+
+
+BACKGROUND_BRIGHT_RED | FOREGROUND_YELLOW, // 255 192 0
+BACKGROUND_BRIGHT_RED | FOREGROUND_PINK, // 255 0 192
+
+BACKGROUND_BRIGHT_GREEN | FOREGROUND_SKYBLUE, // 0 255 192
+BACKGROUND_BRIGHT_GREEN | FOREGROUND_YELLOW, // 192 255 0
+
+BACKGROUND_BRIGHT_BLUE | FOREGROUND_SKYBLUE, // 0 192 255
+BACKGROUND_BRIGHT_BLUE | FOREGROUND_PINK, // 192 0 255
+
+
+*/
+};
+
+
+static const Vector3 colours[] =
+{
+	
+	{0, 0, 0},
+	{255,255,255},
+	{0,0,128},
+	{0,0,255},
+	{0,128,0},
+	{0,128,128},
+	{0,255,0},
+	{0,255,255},
+	{128,0,0},
+	{128,0,128},
+	{128,128,0},
+	{128,128,128},
+	{192,192,192},
+	{255,0,0},
+	{255,0,255},
+	{255,255,0},
+
+	{0,64,255},
+	{0,255,64},
+	{64,0,255},
+	{64,192,0},
+
+	{64,192,128},
+	{64,255,0},
+	{64,255,64},
+	{64,255,255},
+
+	{128,0,64},
+	{128,0,192},
+	{128,64,192},
+	{128,128,192},
+
+	{192,192,255},
+	{255,0,64},
+	{255,64,0},
+	{255,64,64},
+
+	{255,64,192},
+	{255,64,255},
+	{255,255,64},
+	{192,255,64},
+
+	{0,0,64},
+	{0,0,192},
+	{0,64,0},
+	{0,64,64},
+
+	{0,64,128},
+	{0,64,192},
+	{0,128,64},
+	{0,128,192},
+
+	{0,128,255},
+	{0,192,0},
+	{0,192,64},
+	{0,192,128},
+
+	{0,192,192},
+	{0,192,255},
+	{0,255,128},
+	{0,255,192},
+
+	{64,0,0},
+	{64,0,64},
+	{64,0,128},
+	{64,0,192},
+
+	{64,64,0},
+	{64,64,64},
+	{64,64,128},
+	{64,64,192},
+
+	{64,64,255},
+	{64,128,0},
+	{64,128,64},
+	{64,128,128},
+
+	{64,128,192},
+	{64,128,255},
+	{64,192,64},
+	{64,192,192},
+
+	{64,192,255},
+	{64,255,128},
+	{64,255,192},
+	{128,0,255},
+
+	{128,64,0},
+	{128,64,64},
+	{128,64,128},
+	{128,64,255},
+
+	{128,128,64},
+	{128,128,255},
+	{128,192,0},
+	{128,192,64},
+
+	{128,192,128},
+	{128,192,192},
+	{128,192,255},
+	{128,255,0},
+
+	{128,255,64},
+	{128,255,128},
+	{128,255,192},
+	{128,255,255},
+
+	{192,0,0},
+	{192,0,64},
+	{192,0,128},
+	{192,0,192},
+
+	{192,0,255},
+	{192,64,0},
+	{192,64,64},
+	{192,64,128},
+
+	{192,64,192},
+	{192,64,255},
+	{192,128,0},
+	{192,128,64},
+
+	{192,128,128},
+	{192,128,192},
+	{192,128,255},
+	{192,192,0},
+
+	{192,192,64},
+	{192,192,128},
+	{192,255,0},
+	{192,255,128},
+
+	{192,255,192},
+	{192,255,255},
+	{255,0,128},
+	{255,0,192},
+
+	{255,64,128},
+	{255,128,0}, //orange
+	{255,128,64},
+	{255,128,128},
+
+	{255,128,192},
+	{255,128,255},
+	{255,192,0},
+	{255,192,64},
+
+	{255,192,128},
+	{255,192,192},
+	{255,192,255},
+	{255,255,128},
+
+	{255,255,192},
+	
+
+
+
+/*
+
+	{255,0,0},          //BACKGROUND_BRIGHT_RED, //255 0 0     
+	{0,255,0},			//BACKGROUND_BRIGHT_GREEN, // 0 255 0
+	{0,0,255},			//BACKGROUND_BRIGHT_BLUE, // 0 0 255
+	{0,128,128},		//BACKGROUND_TURQOISE, // 0 128 128
+	{0,255,255},		//BACKGROUND_SKYBLUE, // 0 255 255
+	{128,0,128},		//BACKGROUND_PURPLE, // 128 0 128
+	{255,0,255},		//BACKGROUND_PINK, // 255 0 255
+	{128,128,0},		//BACKGROUND_MUSTARD, // 128 128 0
+	{255,255,0},		//BACKGROUND_YELLOW, // 255 255 0
+	{255,255,255},		//BACKGROUND_WHITE, // 255 255 255
+	{192,192,192},		//BACKGROUND_GREY, // 192 192 192
+	{128,128,128},		//BACKGROUND_DARK_GREY, // 128 128 128
+	{128,0,0},			//BACKGROUND_RED, // 128 0 0
+	{0,128,0},			//BACKGROUND_GREEN, // 0 128 0
+	{0,0,128},			//BACKGROUND_BLUE, // 0 0 128
+	{0,0,0},			//BACKGROUND_BLACK, // 0 0 0 
+/*
+	//mixed
+	
+	{64, 0, 0}, //red black
+	{0, 64, 0}, //green black
+	{0, 0, 64}, //blue black
+	{64,64,64}, // dark grey black
+
+	{0,64,64}, // turqoise black
+	{64,0,64}, // purple black
+	{64,64,0}, // mustard black
+
+	{64,64,64}, // dark grey black
+
+	{192, 0, 0}, //red + bright red
+	{0, 192, 0}, //green black + bright green
+	{0, 0, 192}, //blue black bright blue
+
+	{0,192,192}, // turqoise sky blue
+	{192,0,192}, // purple pink
+	{192,192,0}, // mustard yellow
+
+	//now mix colours - red yellow etc
+	{128, 64, 0}, // red mustard
+	{128, 0, 64}, // red purple
+
+	{0, 128, 64}, // Green turqoise
+	{64, 128, 0}, // Green Mustard
+
+	{0, 64, 128}, // blue turqoise
+	{64, 0, 128}, // blue purple
+
+	{255, 128, 0}, // bright red Mustard
+	{255, 0, 128}, // bright red purple
+
+	{0, 255, 128}, // bright green turqoise
+	{128, 255, 0}, // bright green mustard
+
+	{0, 128, 255}, // bright blue turqoise
+	{128, 0, 255}, // bright b;ue purple
+
+	{255, 192, 0}, // bright red yellow
+	{255, 0, 192}, // bright red yellow
+
+	{0, 255, 192}, // bright green skyblue
+	{192, 255, 0}, // bright green yellow
+
+	{0, 192, 255}, // bright blue skyblue
+	{192, 0, 255}, // bright b;ue pink
+
+	/*
+	{255,0,0},          //BACKGROUND_BRIGHT_RED, //255 0 0     
+	{0,255,0},			//BACKGROUND_BRIGHT_GREEN, // 0 255 0
+	{0,0,255},			//BACKGROUND_BRIGHT_BLUE, // 0 0 255
+	{0,128,128},		//BACKGROUND_TURQOISE, // 0 128 128
+	{0,255,255},		//BACKGROUND_SKYBLUE, // 0 255 255
+	{128,0,128},		//BACKGROUND_PURPLE, // 128 0 128
+	{255,0,255},		//BACKGROUND_PINK, // 255 0 255
+	{128,128,0},		//BACKGROUND_MUSTARD, // 128 128 0
+	{255,255,0},		//BACKGROUND_YELLOW, // 255 255 0
+	{255,255,255},		//BACKGROUND_WHITE, // 255 255 255
+	{192,192,192},		//BACKGROUND_GREY, // 192 192 192
+	{128,128,128},		//BACKGROUND_DARK_GREY, // 128 128 128
+	{128,0,0},			//BACKGROUND_RED, // 128 0 0
+	{0,128,0},			//BACKGROUND_GREEN, // 0 128 0
+	{0,0,128},			//BACKGROUND_BLUE, // 0 0 128
+	{0,0,0},			//BACKGROUND_BLACK, // 0 0 0 
+	*/
+};
+
+//todo - set colours in between and set the letter and fg colour
+
+AsciiTexture::AsciiTexture()
+	:m_Buffer(nullptr)
+{
+}
+
+AsciiTexture::~AsciiTexture()
+{
+	for (int i = 0; i < m_Size.y; i++)
+	{
+		SAFE_DELETE_ARY(m_Buffer[i]);
+	}
+	SAFE_DELETE_ARY(m_Buffer);
+}
+
+void AsciiTexture::LoadFromTexture(const ImageFile* pTexture)
+{
+	if (pTexture)
+	{
+		m_Size.x = pTexture->width * 2;
+		m_Size.y = pTexture->height;
+
+		m_Buffer = new AsciiPixel* [m_Size.y];
+
+		for (int y = 0; y < m_Size.y; y++)
+		{
+			m_Buffer[y] = new AsciiPixel[m_Size.x];
+
+			for (int x = 0; x < pTexture->width; x++)
+			{
+				int startPos = x * 4 + (y * 4 * pTexture->width);
+				unsigned char r = pTexture->buffer[startPos];
+				unsigned char g = pTexture->buffer[startPos + 1];
+				unsigned char b = pTexture->buffer[startPos + 2];
+				unsigned char a = pTexture->buffer[startPos + 3];
+				unsigned short colour = 0;
+				WCHAR letter = ' ';
+
+				//r = 64;
+				//g = 0;
+				//b = 0;
+
+				int index = 0;
+
+				Vector3 pixelColour(r, g, b);
+				float currentDistance = FLT_MAX;
+				for (int i = 0; i < 125; i++) // 16
+				{
+					float distToColour = pixelColour.distanceSquared(colours[i]);
+					if (distToColour < currentDistance)
+					{
+						currentDistance = distToColour;
+						colour = ansiColours[i];
+						
+						index = i;
+					}
+				}
+				
+
+				letter = index >= 36 ? 177 : index >= 16 ? 176 : ' ';
+				//colour = BACKGROUND_WHITE | FOREGROUND_YELLOW;
+
+				//>= 16
+				//letter = 176; //low
+				//>=36
+				//letter = 177; //medium
+				//letter = 178; //high
+
+
+				int z = 0;
+
+				/*
+				if (r >= 240)
+				{
+					colour |= BACKGROUND_BRIGHT_RED;
+				}
+				else if (r >= 127) {
+					colour |= BACKGROUND_RED;
+					colour |= FOREGROUND_BRIGHT_RED;
+				}
+				else if (r >= 80) {
+					colour |= BACKGROUND_RED;
+					colour |= FOREGROUND_RED;
+				}
+				else if (r >= 30) {
+					colour |= BACKGROUND_RED;
+				}
+
+				if (g >= 240)
+				{
+					colour |= BACKGROUND_BRIGHT_GREEN;
+					if (r >= 30 || b >= 30) {
+					}
+				}
+				else if (g >= 127) {
+					colour |= BACKGROUND_GREEN;
+					colour |= FOREGROUND_BRIGHT_GREEN;
+				}
+				else if (g >= 80) {
+					colour |= BACKGROUND_GREEN;
+					colour |= FOREGROUND_GREEN;
+				}
+				else if (g >= 30) {
+					colour |= BACKGROUND_GREEN;
+				}
+
+				if (b >= 240)
+				{
+					colour |= BACKGROUND_BRIGHT_BLUE;
+				}
+				else if (b >= 127) {
+					colour |= BACKGROUND_BLUE;
+					colour |= FOREGROUND_BRIGHT_BLUE;
+				}
+				else if (b >= 80) {
+					colour |= BACKGROUND_BLUE;
+					colour |= FOREGROUND_BLUE;
+				}
+				else if (b >= 30) {
+					colour |= BACKGROUND_BLUE;
+				}
+				*/
+				//colour = colours[(x%16)];
+				int xpos = x * 2;
+				m_Buffer[y][xpos].rgb = CHAR_INFO{ letter, colour };
+				m_Buffer[y][xpos].a = a;
+
+				m_Buffer[y][xpos + 1].rgb = CHAR_INFO{ letter, colour };
+				m_Buffer[y][xpos + 1].a = a;
+			}
+		}
+	}
+
+}

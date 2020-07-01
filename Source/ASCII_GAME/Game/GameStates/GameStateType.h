@@ -1,0 +1,11 @@
+#ifndef _GAME_STATE_TYPE_H_
+#define _GAME_STATE_TYPE_H_
+
+enum E_GameStateType
+{
+	E_STATE_TYPE_MENU,
+	E_STATE_TYPE_CHIP_8_EMULATOR,
+	E_STATE_TYPE_TEST,
+};
+
+#endif

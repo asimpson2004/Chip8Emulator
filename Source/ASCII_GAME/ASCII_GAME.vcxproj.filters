@@ -1,0 +1,532 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Game\Game.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Renderer\ASCIIRenderer.cpp">
+      <Filter>Core\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Maths\Vector2.cpp">
+      <Filter>Core\Maths</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Maths\Vector3.cpp">
+      <Filter>Core\Maths</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\GameState\GameStateManager.cpp">
+      <Filter>Core\GameState</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Input\InputManager.cpp">
+      <Filter>Core\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\GameStates\MainMenu.cpp">
+      <Filter>Game\GameStates</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\GameStates\TestGameState.cpp">
+      <Filter>Game\GameStates</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\GameObject\GameObject.cpp">
+      <Filter>Core\GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\GameState\GameState.cpp">
+      <Filter>Core\GameState</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\GameStates\GameStateFactoryImpl.cpp">
+      <Filter>Game\GameStates</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\GameObject\GameObjectManager.cpp">
+      <Filter>Core\GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\GameObjects\GameObjectFactoryImpl.cpp">
+      <Filter>Game\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Components\Component.cpp">
+      <Filter>Core\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Components\ComponentManager.cpp">
+      <Filter>Core\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Components\ComponentFactory.cpp">
+      <Filter>Core\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Messages\MessageManager.cpp">
+      <Filter>Core\Messages</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Components\Graphics\SpriteComponent.cpp">
+      <Filter>Core\Components\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\GameObject\GameObjectFactory.cpp">
+      <Filter>Core\GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Maths\Matrix4x4.cpp">
+      <Filter>Core\Maths</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Platform\Endian.cpp">
+      <Filter>Core\Platform</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Platform\File.cpp">
+      <Filter>Core\Platform</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Assets\TargaFile.cpp">
+      <Filter>Core\Assets</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Assets\AssetManager.cpp">
+      <Filter>Core\Assets</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Utils\Types.cpp">
+      <Filter>Core\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Components\Graphics\AnimatorComponent.cpp">
+      <Filter>Core\Components\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Maths\Rect.cpp">
+      <Filter>Core\Maths</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Components\Physics\BoxColliderComponent.cpp">
+      <Filter>Core\Components\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Renderer\AsciiTexture.cpp">
+      <Filter>Core\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\GameData\GameDatabase\GameDatabase.cpp">
+      <Filter>Game\GameData\GameDatabase</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\GameDatabase\DatabaseTypes.cpp">
+      <Filter>Core\GameDatabase</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\GameDatabase\GameDatabaseManager.cpp">
+      <Filter>Core\GameDatabase</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\GameDatabase\GameDataTest.cpp">
+      <Filter>Core\GameDatabase</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\GameDatabase\PaksList.cpp">
+      <Filter>Core\GameDatabase</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\GameDatabase\ProjectSettings.cpp">
+      <Filter>Core\GameDatabase</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\GameDatabase\Vector2D.cpp">
+      <Filter>Core\GameDatabase</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\GameDatabase\Factory\Factory.cpp">
+      <Filter>Core\GameDatabase\Factory</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Platform\IO\File_Win32.cpp">
+      <Filter>Core\Platform\IO</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\GameDatabase\CreationData\GameObjectCreate.cpp">
+      <Filter>Core\GameDatabase\CreationData</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\GameDatabase\CreationData\ComponentCreate.cpp">
+      <Filter>Core\GameDatabase\CreationData</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\GameDatabase\CreationData\SpriteComponentCreate.cpp">
+      <Filter>Core\GameDatabase\CreationData</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\GameDatabase\CreationData\AnimatorControllerCreate.cpp">
+      <Filter>Core\GameDatabase\CreationData</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Components\Chip8EmulatorComponent.cpp">
+      <Filter>Game\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Components\ComponentFactoryImpl.cpp">
+      <Filter>Game\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Input\KeyboardAndMouseInputDevice.cpp">
+      <Filter>Game\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\GameStates\Chip8EmulatorGameState.cpp">
+      <Filter>Game\GameStates</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\GameData\GameDatabase\CreationData\GameStates\Chip8EmulatorGameStateCreate.cpp">
+      <Filter>Game\GameData\GameDatabase\CreationData\GameStates</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Components\UI\ListMenuComponent.cpp">
+      <Filter>Core\Components\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\GameDatabase\CreationData\UI\ListMenuComponentCreate.cpp">
+      <Filter>Core\GameDatabase\CreationData\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Components\UI\FileListMenuComponent.cpp">
+      <Filter>Core\Components\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\GameDatabase\CreationData\UI\FileListMenuComponentCreate.cpp">
+      <Filter>Core\GameDatabase\CreationData\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Components\UI\Chip8GameStateLauncherComponent.cpp">
+      <Filter>Game\Components\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\GameData\GameDatabase\CreationData\Chip8EmulatorComponentCreate.cpp">
+      <Filter>Game\GameData\GameDatabase\CreationData\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\GameData\GameDatabase\CreationData\UI\Chip8GameStateLauncherComponentCreate.cpp">
+      <Filter>Game\GameData\GameDatabase\CreationData\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Components\UI\TextComponent.cpp">
+      <Filter>Core\Components\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\GameDatabase\CreationData\UI\TextComponentCreate.cpp">
+      <Filter>Core\GameDatabase\CreationData\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\GameData\GameDatabase\CreationData\UI\PauseMenuControllerComponentCreate.cpp">
+      <Filter>Game\GameData\GameDatabase\CreationData\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Components\UI\PauseMenuControllerComponent.cpp">
+      <Filter>Game\Components\UI</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Core">
+      <UniqueIdentifier>{4458fac5-906c-4cb5-9399-ed656e517517}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game">
+      <UniqueIdentifier>{3fe4f25b-4cab-466a-9a7b-85b3e701b26d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\Renderer">
+      <UniqueIdentifier>{3d915fb0-1ffd-4f36-a51f-1f7cce5ee000}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\Maths">
+      <UniqueIdentifier>{82fa3e56-8968-4637-b5d3-20371d11b230}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\GameObjects">
+      <UniqueIdentifier>{872a3f34-878d-4c9a-ae1c-a6e597d3af18}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\GameState">
+      <UniqueIdentifier>{a4ef0c33-9092-4ebd-a436-659b06b4cf66}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\Input">
+      <UniqueIdentifier>{2d6253e8-b993-4f91-a228-bf447a780d67}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\GameStates">
+      <UniqueIdentifier>{7be0c80c-e394-44ad-9fda-68ef80e4ea60}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\GameObject">
+      <UniqueIdentifier>{ad1229da-0959-4802-9220-1457694842f0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\GameData">
+      <UniqueIdentifier>{9c56479b-4b60-4b86-977b-744466bdf65b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\Components">
+      <UniqueIdentifier>{a59ba925-ea05-4620-81a8-4ad98dffa572}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\Messages">
+      <UniqueIdentifier>{d66cc87c-568a-42fc-8b54-a7bb6ebb5870}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\Components\Graphics">
+      <UniqueIdentifier>{045c16c4-3e41-42e8-a498-d997a54b3399}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\Platform">
+      <UniqueIdentifier>{e9e53b87-ec33-4b88-a24b-2c4f45b1481b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\Assets">
+      <UniqueIdentifier>{437b8969-89c9-45b2-b27c-c40cecb168e4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\Utils">
+      <UniqueIdentifier>{18cde602-4994-47f9-80f8-d2383ffae9cd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\Components\Physics">
+      <UniqueIdentifier>{a63714a0-547d-4cf2-98ad-2018dd81535e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\GameDatabase">
+      <UniqueIdentifier>{9d5dde1e-90df-4a32-acd3-f9140a84562c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\GameData\GameDatabase">
+      <UniqueIdentifier>{9eaffa29-c9e4-4930-aa1b-a8ef41412ef2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\GameDatabase\Factory">
+      <UniqueIdentifier>{e19e842f-e195-47ff-ace2-d9cb70f2b582}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\Platform\IO">
+      <UniqueIdentifier>{aa2ada97-0c6a-438d-a6d3-dea4e6188a2e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\GameDatabase\CreationData">
+      <UniqueIdentifier>{0fa8212d-2277-493e-b2b0-df29f1e60ee2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\GameData\GameDatabase\CreationData">
+      <UniqueIdentifier>{3ede8828-743f-4852-a84e-b227936c30c8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Components">
+      <UniqueIdentifier>{ca1bb22d-2569-40b5-bed9-8691eba1982e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Input">
+      <UniqueIdentifier>{f146d851-30db-4582-830b-4bb8c8c2a6a1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\GameData\GameDatabase\CreationData\GameStates">
+      <UniqueIdentifier>{d3336f55-ae2d-4adc-8a48-a026110f7a3a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\Components\UI">
+      <UniqueIdentifier>{81ee930a-0032-4129-b69a-ce736ce1a29e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\GameDatabase\CreationData\UI">
+      <UniqueIdentifier>{1249203d-b099-482a-bc45-2fa0b398e2be}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Components\UI">
+      <UniqueIdentifier>{09a13059-90fa-4919-910a-47a1985018e9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\GameData\GameDatabase\CreationData\UI">
+      <UniqueIdentifier>{13eb94a2-81cb-4420-a612-36da3af5c26c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Messages">
+      <UniqueIdentifier>{7319a666-f077-4a99-af19-a2caf6937ce1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\GameData\GameDatabase\CreationData\Components">
+      <UniqueIdentifier>{3d311a12-8c99-4921-b721-5279ab533bd6}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Game\Game.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Renderer\ASCIIRenderer.h">
+      <Filter>Core\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\GameStates.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Renderer\ConsoleColours.h">
+      <Filter>Core\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Maths\Vector2.h">
+      <Filter>Core\Maths</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Maths\Vector3.h">
+      <Filter>Core\Maths</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\GameState\GameState.h">
+      <Filter>Core\GameState</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\GameState\GameStateManager.h">
+      <Filter>Core\GameState</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Input\InputManager.h">
+      <Filter>Core\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\GameStates\MainMenu.h">
+      <Filter>Game\GameStates</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\GameStates\TestGameState.h">
+      <Filter>Game\GameStates</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\GameObject\GameObject.h">
+      <Filter>Core\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\GameState\GameStateFactory.h">
+      <Filter>Core\GameState</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\GameStates\GameStateFactoryImpl.h">
+      <Filter>Game\GameStates</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\GameStates\GameStateType.h">
+      <Filter>Game\GameStates</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\GameObject\GameObjectFactory.h">
+      <Filter>Core\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\GameObject\GameObjectManager.h">
+      <Filter>Core\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\GameObjects\GameObjectFactoryImpl.h">
+      <Filter>Game\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Components\Component.h">
+      <Filter>Core\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Components\ComponentManager.h">
+      <Filter>Core\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Components\ComponentFactory.h">
+      <Filter>Core\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Components\ComponentType.h">
+      <Filter>Core\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Messages\Message.h">
+      <Filter>Core\Messages</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Messages\MessageManager.h">
+      <Filter>Core\Messages</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Messages\MessageHandler.h">
+      <Filter>Core\Messages</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Components\Graphics\SpriteComponent.h">
+      <Filter>Core\Components\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Renderer\AsciiRendererInterface.h">
+      <Filter>Core\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Maths\Matrix4x4.h">
+      <Filter>Core\Maths</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Maths\MathHelpers.h">
+      <Filter>Core\Maths</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Platform\Endian.h">
+      <Filter>Core\Platform</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Platform\File.h">
+      <Filter>Core\Platform</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Assets\ImageFile.h">
+      <Filter>Core\Assets</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Assets\TargaFile.h">
+      <Filter>Core\Assets</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Assets\AssetManager.h">
+      <Filter>Core\Assets</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Utils\Types.h">
+      <Filter>Core\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Utils\Utils.h">
+      <Filter>Core\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Assets\SpritesheetDef.h">
+      <Filter>Core\Assets</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Components\Graphics\AnimatorComponent.h">
+      <Filter>Core\Components\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Maths\Rect.h">
+      <Filter>Core\Maths</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Messages\SetSpriteRectMessage.h">
+      <Filter>Core\Messages</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Messages\MessageType.h">
+      <Filter>Core\Messages</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Messages\SetSpriteTextureMessage.h">
+      <Filter>Core\Messages</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Components\Physics\BoxColliderComponent.h">
+      <Filter>Core\Components\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Renderer\AsciiTexture.h">
+      <Filter>Core\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\GameData\GameDatabase\GameDatabase.h">
+      <Filter>Game\GameData\GameDatabase</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\GameDatabase\DatabaseTypes.h">
+      <Filter>Core\GameDatabase</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\GameDatabase\GameDatabaseManager.h">
+      <Filter>Core\GameDatabase</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\GameDatabase\GameDataHelpers.h">
+      <Filter>Core\GameDatabase</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\GameDatabase\GameDataTest.h">
+      <Filter>Core\GameDatabase</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\GameDatabase\PaksList.h">
+      <Filter>Core\GameDatabase</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\GameDatabase\ProjectSettings.h">
+      <Filter>Core\GameDatabase</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\GameDatabase\Vector2D.h">
+      <Filter>Core\GameDatabase</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\GameDatabase\Factory\Factory.h">
+      <Filter>Core\GameDatabase\Factory</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\GameDatabase\Factory\FactoryHelpers.h">
+      <Filter>Core\GameDatabase\Factory</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Platform\IO\File.h">
+      <Filter>Core\Platform\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\GameDatabase\CreationData\GameObjectCreate.h">
+      <Filter>Core\GameDatabase\CreationData</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\GameDatabase\CreationData\ComponentCreate.h">
+      <Filter>Core\GameDatabase\CreationData</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\GameDatabase\CreationData\SpriteComponentCreate.h">
+      <Filter>Core\GameDatabase\CreationData</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\GameDatabase\CreationData\BoxColliderComponentCreate.h">
+      <Filter>Core\GameDatabase\CreationData</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\GameDatabase\CreationData\GameStateCreate.h">
+      <Filter>Core\GameDatabase\CreationData</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\GameData\GameDatabase\CreationData\MainMenuGameStateCreate.h">
+      <Filter>Game\GameData\GameDatabase\CreationData</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\GameData\GameDatabase\CreationData\TestGameStateCreationData.h">
+      <Filter>Game\GameData\GameDatabase\CreationData</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Components\Chip8EmulatorComponent.h">
+      <Filter>Game\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Components\GameComponentType.h">
+      <Filter>Game\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Components\ComponentFactoryImpl.h">
+      <Filter>Game\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Input\InputDevice.h">
+      <Filter>Core\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Input\KeyboardAndMouseInputDevice.h">
+      <Filter>Game\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\GameStates\Chip8EmulatorGameState.h">
+      <Filter>Game\GameStates</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\GameData\GameDatabase\CreationData\GameStates\Chip8EmulatorGameStateCreate.h">
+      <Filter>Game\GameData\GameDatabase\CreationData\GameStates</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Components\UI\ListMenuComponent.h">
+      <Filter>Core\Components\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\GameDatabase\CreationData\UI\ListMenuComponentCreate.h">
+      <Filter>Core\GameDatabase\CreationData\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\GameDatabase\CreationData\AnimatorComponentCreate.h">
+      <Filter>Core\GameDatabase\CreationData</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Messages\MenuItemSelectedMessage.h">
+      <Filter>Core\Messages</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Components\UI\FileListMenuComponent.h">
+      <Filter>Core\Components\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\GameDatabase\CreationData\UI\FileListMenuComponentCreate.h">
+      <Filter>Core\GameDatabase\CreationData\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Messages\GameMessageType.h">
+      <Filter>Game\Messages</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Components\UI\Chip8GameStateLauncherComponent.h">
+      <Filter>Game\Components\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\GameData\GameDatabase\CreationData\Chip8EmulatorComponentCreate.h">
+      <Filter>Game\GameData\GameDatabase\CreationData\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\GameData\GameDatabase\CreationData\UI\Chip8GameStateLauncherComponentCreate.h">
+      <Filter>Game\GameData\GameDatabase\CreationData\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\GameDatabase\CreationData\UI\TextAlignmentType.h">
+      <Filter>Core\GameDatabase\CreationData\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Components\UI\TextComponent.h">
+      <Filter>Core\Components\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\GameDatabase\CreationData\UI\TextComponentCreate.h">
+      <Filter>Core\GameDatabase\CreationData\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\GameData\GameDatabase\CreationData\UI\PauseMenuControllerComponentCreate.h">
+      <Filter>Game\GameData\GameDatabase\CreationData\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Components\UI\PauseMenuControllerComponent.h">
+      <Filter>Game\Components\UI</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
