@@ -7,13 +7,13 @@ public:
 
 	ImageFile()
 	:buffer(nullptr)
-	,width(0.0)
-	,height(0.0)
-	,size(0.0)
+	,width(0)
+	,height(0)
+	,size(0)
 	{	
 	}
 
-	~ImageFile() { if (buffer) delete(buffer); }
+	virtual ~ImageFile() { if (buffer) delete(buffer); }
 		
 	unsigned char* buffer;
 	long width;

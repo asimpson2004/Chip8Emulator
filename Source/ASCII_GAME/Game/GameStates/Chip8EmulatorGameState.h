@@ -2,6 +2,7 @@
 #define _CHIP_8_EMULATOR_GAME_STATE_H_
 
 #include "../../Core/GameState/GameState.h"
+#include "../../Core/Utils/Utils.h"
 
 class GameStateCreate;
 class ASCIIRenderer;
@@ -19,7 +20,7 @@ public:
 	virtual void OnResume();
 
 	//MessageHandler overrides
-	virtual void OnMessage(Message* pMessage) {};
+	virtual void OnMessage(Message* pMessage) { UNUSED_VARIABLE(pMessage); }
 
 private:
 

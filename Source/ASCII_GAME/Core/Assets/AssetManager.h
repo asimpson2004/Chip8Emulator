@@ -4,7 +4,7 @@
 #include <map>
 
 class ImageFile;
-class SpritesheetDef;
+struct SpritesheetDef;
 class AsciiTexture;
 
 class AssetManager

@@ -8,7 +8,7 @@ static const int NUM_CHIP_8_REGISTERS = 16;
 static const int CHIP_8_STACK_SIZE = 16;
 static const int CHIP_8_SCREEN_WIDTH = 64;
 static const int CHIP_8_SCREEN_HEIGHT = 32;
-static const int NUM_CHIP_8_KEYS = 16;
+static const char NUM_CHIP_8_KEYS = 16;
 
 class Chip8EmulatorComponent : public Component
 {

@@ -7,6 +7,7 @@ class GameStateCreate;
 class GameStateFactory
 {
 public:
+	virtual ~GameStateFactory() {}
 	virtual GameState* GetGameState(const GameStateCreate* creationData) = 0;
 };
 

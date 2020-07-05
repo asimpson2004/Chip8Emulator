@@ -15,7 +15,7 @@ GameStateManager::GameStateManager()
 
 GameStateManager::~GameStateManager()
 {
-	for (int i = 0; i < m_GameStates.size(); i++)
+	for (unsigned int i = 0; i < m_GameStates.size(); i++)
 	{
 		GameState* pGameState = m_GameStates.back();
 		m_GameStates.pop_back();

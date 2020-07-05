@@ -203,11 +203,11 @@ bool AssetManager::LoadSpritesheetDefFromFile(const char* filename)
 				}
 				else if (strcmp(attribute->Name(), "oX") == 0)
 				{
-					spritesheetSpriteDef.m_OffsetX = attribute->IntValue();
+					spritesheetSpriteDef.m_OffsetX = (float) attribute->IntValue();
 				}
 				else if (strcmp(attribute->Name(), "oY") == 0)
 				{
-					spritesheetSpriteDef.m_OffsetY = attribute->IntValue();
+					spritesheetSpriteDef.m_OffsetY = (float) attribute->IntValue();
 				}
 				else if (strcmp(attribute->Name(), "oW") == 0)
 				{

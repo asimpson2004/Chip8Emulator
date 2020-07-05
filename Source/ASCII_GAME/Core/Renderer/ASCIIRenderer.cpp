@@ -40,7 +40,7 @@ ASCIIRenderer::~ASCIIRenderer()
 }
 
 
-void ASCIIRenderer::Initialise(int width, int height)
+void ASCIIRenderer::Initialise(short width, short height)
 {
 	m_hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 	
@@ -57,8 +57,8 @@ void ASCIIRenderer::Initialise(int width, int height)
 	m_ScreenData[m_BackBufferIndex] = new CHAR_INFO[m_Width * m_Height];
 	m_ScreenData[m_FrontBufferIndex] = new CHAR_INFO[m_Width * m_Height];
 
-	m_DepthBuffer[m_BackBufferIndex] = new char[m_Width * m_Height];
-	m_DepthBuffer[m_FrontBufferIndex] = new char[m_Width * m_Height];
+	m_DepthBuffer[m_BackBufferIndex] = new int[m_Width * m_Height];
+	m_DepthBuffer[m_FrontBufferIndex] = new int[m_Width * m_Height];
 
 	
 	ClearScreen();
@@ -66,14 +66,15 @@ void ASCIIRenderer::Initialise(int width, int height)
 
 	m_RenderThread = std::thread(&ASCIIRenderer::RenderAsync, this);
 
-	Translate(Vector2(m_DisplayArea.Left, m_DisplayArea.Top));
+	Vector2 translation(m_DisplayArea.Left, m_DisplayArea.Top);
+	Translate(translation);
 
 	m_bInitialised = true;
 }
 
-int ASCIIRenderer::DetectBestFontSize(int width, int height)
+SHORT ASCIIRenderer::DetectBestFontSize(short width, short height)
 {
-	int workingFontSize = 0;
+	SHORT workingFontSize = 0;
 	bool found = false;
 
 	while (!found)
@@ -91,7 +92,7 @@ int ASCIIRenderer::DetectBestFontSize(int width, int height)
 }
 
 
-void ASCIIRenderer::InitialisePixelSize(int size)
+void ASCIIRenderer::InitialisePixelSize(SHORT size)
 {
 	//---Set up font size to look like pixel---
 	CONSOLE_FONT_INFOEX font_size;;
@@ -105,7 +106,7 @@ void ASCIIRenderer::InitialisePixelSize(int size)
 	SetCurrentConsoleFontEx(m_hConsole, true, &font_size);	//Set the new font size
 }
 
-bool ASCIIRenderer::SetWindow(int Width, int Height)
+bool ASCIIRenderer::SetWindow(short Width, short Height)
 {
 	m_DesiredWidth = Width;
 	m_DesiredHeight = Height;
@@ -125,8 +126,8 @@ bool ASCIIRenderer::SetWindow(int Width, int Height)
 	screenRect = { 0, 0, MaxWindowSize.X, MaxWindowSize.Y };
 //#endif
 	
-	bool bufferSizeSet1 = SetConsoleScreenBufferSize(m_hConsole, { screenRect.Right, screenRect.Bottom});
-	bool windowInfoSet = SetConsoleWindowInfo(m_hConsole, TRUE, &screenRect);
+	SetConsoleScreenBufferSize(m_hConsole, { screenRect.Right, screenRect.Bottom});
+	SetConsoleWindowInfo(m_hConsole, TRUE, &screenRect);
 //#ifdef DEBUG
 	//SetConsoleDisplayMode(m_hConsole, CONSOLE_WINDOWED_MODE, &screenSize); //CONSOLE_WINDOWED_MODE //CONSOLE_FULLSCREEN_MODE
 //#else
@@ -139,12 +140,10 @@ bool ASCIIRenderer::SetWindow(int Width, int Height)
 	m_Width = bufferInfo.dwMaximumWindowSize.X;
 	m_Height = bufferInfo.dwMaximumWindowSize.Y;
 
-	short  halfDifferenceX = (m_Width - m_DesiredWidth) * 0.5f;
-	short  halfDifferenceY = (m_Height - m_DesiredHeight) * 0.5f;
+	short  halfDifferenceX = (short)( (m_Width - m_DesiredWidth) * 0.5f);
+	short  halfDifferenceY = (short)( (m_Height - m_DesiredHeight) * 0.5f);
 
 	m_DisplayArea = { max(halfDifferenceX, 0), max(halfDifferenceY, 0), halfDifferenceX + m_DesiredWidth, halfDifferenceY + m_DesiredHeight };
-
-	int a = 0;
 
 	LPCTSTR windowTitle = "ASCII Game";
 	SetConsoleTitle(windowTitle);
@@ -162,11 +161,11 @@ void ASCIIRenderer::ClearScreen(WORD attributes)
 		m_ScreenData[m_BackBufferIndex][i].Attributes = attributes;
 
 		//clear depth buffer
-		m_DepthBuffer[m_BackBufferIndex][i] = CHAR_MIN;
+		m_DepthBuffer[m_BackBufferIndex][i] = INT_MIN;
 	}
 }
 
-void ASCIIRenderer::SetPixel(int x, int y, const CHAR_INFO* pPixelData, const char layer)
+void ASCIIRenderer::SetPixel(int x, int y, const CHAR_INFO* pPixelData, const int layer)
 {
 	if (x >= m_DisplayArea.Left && x < m_DisplayArea.Right && y >= m_DisplayArea.Top && y < m_DisplayArea.Bottom)
 	{

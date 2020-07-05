@@ -22,7 +22,7 @@ GameObject::GameObject(const GameObjectCreate* pCreationData)
 		}
 
 		//programatic components
-		for (int i = 0; i < pCreationData->m_Components.size(); i++)
+		for (unsigned int i = 0; i < pCreationData->m_Components.size(); i++)
 		{			
 			Component* pComponent = ComponentManager::Instance()->GetComponent(pCreationData->m_Components[i], this);
 			if (pComponent)
@@ -44,7 +44,7 @@ GameObject::~GameObject()
 void GameObject::OnMessage(Message* pMessage)
 {
 	//TODO - subscribe to messages so dont need to send message to all components
-	for (int i = 0; i < m_Components.size(); i++)
+	for (unsigned int i = 0; i < m_Components.size(); i++)
 	{
 		m_Components[i]->OnMessage(pMessage);
 	}
@@ -52,7 +52,7 @@ void GameObject::OnMessage(Message* pMessage)
 
 void GameObject::BroadcastMessage(Message* pMessage)
 {
-
+	UNUSED_VARIABLE(pMessage);
 }
 
 void GameObject::Update(float delta)

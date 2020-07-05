@@ -28,7 +28,7 @@ GameState::~GameState()
 
 void GameState::Update(float delta)
 {
-	for (int i = 0; i < m_GameObjects.size(); ++i)
+	for (unsigned int i = 0; i < m_GameObjects.size(); ++i)
 	{
 		m_GameObjects[i]->Update(delta);
 	}
@@ -40,7 +40,7 @@ void GameState::Render(ASCIIRenderer* pRenderer)
 
 	pRenderer->Translate(m_Position);
 
-	for (int i = 0; i < m_GameObjects.size(); ++i)
+	for (unsigned int i = 0; i < m_GameObjects.size(); ++i)
 	{
 		m_GameObjects[i]->Render(pRenderer);
 	}

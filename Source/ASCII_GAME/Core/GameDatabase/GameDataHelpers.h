@@ -11,28 +11,28 @@ namespace GDb
 {
 
 //int
-static void InitialiseFromBinary(int* pInt, char*& buffer)
+inline void InitialiseFromBinary(int* pInt, char*& buffer)
 {
 	memcpy( pInt, buffer, sizeof(int) );
 	buffer += sizeof(int);
 }
 
 //float
-static void InitialiseFromBinary(float* pFloat, char*& buffer)
+inline void InitialiseFromBinary(float* pFloat, char*& buffer)
 {
 	memcpy( pFloat, buffer, sizeof(float) );
 	buffer += sizeof(float);
 }
 
 //bool
-static void InitialiseFromBinary(bool* pBool, char*& buffer)
+inline void InitialiseFromBinary(bool* pBool, char*& buffer)
 {
 	memcpy( pBool, buffer, sizeof(bool) );
 	buffer += sizeof(bool);
 }
 
 //class
-static void InitialiseFromBinary(C_DataItem* pGameDataBase, char*& buffer)
+inline void InitialiseFromBinary(C_DataItem* pGameDataBase, char*& buffer)
 {
 	int hashcode = 0;
 	memcpy( &hashcode, buffer, sizeof(int) );
@@ -46,7 +46,7 @@ static void InitialiseFromBinary(C_DataItem* pGameDataBase, char*& buffer)
 }
 
 //string
-static void InitialiseFromBinary(const char** pStr, char*& buffer)
+inline void InitialiseFromBinary(const char** pStr, char*& buffer)
 {
 	unsigned int strlen = 0;
 	memcpy( &strlen, buffer, sizeof(int) );
@@ -66,7 +66,7 @@ static void InitialiseFromBinary(const char** pStr, char*& buffer)
 
 //enums or classes
 template<class type> 
-static void InitialiseFromBinary(type* pType, char*& buffer)
+inline void InitialiseFromBinary(type* pType, char*& buffer)
 {
 	int hashcode = 0;
 	memcpy( &hashcode, buffer, sizeof(int) );
@@ -87,7 +87,7 @@ static void InitialiseFromBinary(type* pType, char*& buffer)
 
 //vectors
 template<class type> 
-static void InitialiseFromBinary(C_Array<type>* pVector, char*& buffer)
+inline void InitialiseFromBinary(C_Array<type>* pVector, char*& buffer)
 {
 	unsigned int size = 0;
 	memcpy( &size, buffer, sizeof(int) );
@@ -104,7 +104,7 @@ static void InitialiseFromBinary(C_Array<type>* pVector, char*& buffer)
     
 // references
 template <class type>
-static void InitialiseFromBinary(C_Ref<type>* pRef, char*& buffer)
+inline void InitialiseFromBinary(C_Ref<type>* pRef, char*& buffer)
 {
     // get item id
 	memcpy( &pRef->m_ItemId, buffer, sizeof(unsigned int) );
@@ -113,7 +113,7 @@ static void InitialiseFromBinary(C_Ref<type>* pRef, char*& buffer)
 
 //Pointers
 template <class type>
-static void InitialiseFromBinary(C_Pointer<type>* pPointer, char*& buffer)
+inline void InitialiseFromBinary(C_Pointer<type>* pPointer, char*& buffer)
 {
 	// get item hashcode
 	memcpy(&pPointer->m_Hashcode, buffer, sizeof(unsigned int));

@@ -10,7 +10,7 @@
 
 static const int CHIP_8_FONT_SIZE = 80;
 static const int CHIP_8_FONT_LOCATION = 0x0;
-static const int CHIP_8_ROM_LOCATION = 0x200;
+static const unsigned short CHIP_8_ROM_LOCATION = 0x200;
 
 static const int OPCODES_PER_PASS = 15;
 
@@ -39,7 +39,7 @@ Chip8EmulatorComponent::Chip8EmulatorComponent(const ComponentCreate* pCreationD
 ,m_SystemMemory{}
 ,m_Registers{}
 ,m_Stack{}
-,m_StackPos(-1)
+,m_StackPos((unsigned char)255)
 ,m_DelayTimer(0)
 ,m_SoundTimer(0)
 ,m_AddressRegister(0)
@@ -76,7 +76,7 @@ void Chip8EmulatorComponent::LoadRom(const char* filename)
 	fileType romFile;
 	if (romFile.load(filename))
 	{
-		for (int i = 0; i < romFile.size; i++)
+		for (unsigned int i = 0; i < romFile.size; i++)
 		{
 			m_SystemMemory[CHIP_8_ROM_LOCATION + i] = romFile.buffer[i];
 		}
@@ -142,6 +142,7 @@ void Chip8EmulatorComponent::Render(ASCIIRenderer* pRenderer)
 
 void Chip8EmulatorComponent::OnMessage(Message* pMessage)
 {
+	UNUSED_VARIABLE(pMessage);
 }
 
 inline void Chip8EmulatorComponent::DecodeAndExecute(const unsigned short int& opcode)
@@ -463,7 +464,7 @@ inline void Chip8EmulatorComponent::DecodeAndExecute(const unsigned short int& o
 				{					
 					//Wait for a key press, store the value of the key in Vx.
 					//All execution stops until a key is pressed, then the value of that key is stored in Vx.
-					for (int i = 0; i < NUM_CHIP_8_KEYS; ++i)
+					for (unsigned char i = 0; i < NUM_CHIP_8_KEYS; ++i)
 					{
 						if (m_Keyboard[i] != 0)
 						{

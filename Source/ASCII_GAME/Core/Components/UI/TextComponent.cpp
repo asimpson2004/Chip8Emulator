@@ -25,7 +25,7 @@ void TextComponent::Initialise()
 
 void TextComponent::Update(float delta)
 {
-
+	UNUSED_VARIABLE(delta);
 }
 
 void TextComponent::Render(ASCIIRenderer* pRenderer)
@@ -37,13 +37,13 @@ void TextComponent::Render(ASCIIRenderer* pRenderer)
 	Vector2 currentTranslation = pRenderer->GetMatrix().GetTranslation2D();
 	Vector2 alignedPosition = GetAlignedPosition(currentTranslation);
 
-	for (int x = 0; x < m_DisplayText.size(); ++x)
+	for (unsigned int x = 0; x < m_DisplayText.size(); ++x)
 	{
 		CHAR_INFO pixel;
 		pixel.Attributes = FOREGROUND_WHITE;
 		pixel.Char.UnicodeChar = m_DisplayText[x];
 
-		pRenderer->SetPixel(alignedPosition.x + x, alignedPosition.y, &pixel, 100);
+		pRenderer->SetPixel((int)alignedPosition.x + x, (int)alignedPosition.y, &pixel, 100);
 	}
 
 	pRenderer->PopMatrix();
@@ -52,7 +52,7 @@ void TextComponent::Render(ASCIIRenderer* pRenderer)
 
 void TextComponent::OnMessage(Message* pMessage)
 {
-
+	UNUSED_VARIABLE(pMessage);
 }
 
 Vector2 TextComponent::GetAlignedPosition(const Vector2& position) const

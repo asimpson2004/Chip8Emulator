@@ -1,4 +1,5 @@
 #include "Endian.h"
+#include "../Utils/Utils.h"
 
 //define endian functions
 namespace endian
@@ -38,10 +39,10 @@ namespace endian
 	int				l32NoSwap( int l )				{ return l; }
 
 	void			floatSwap( float& f )			{ int *pnt = (int*)&f;	*pnt = l32Swap( *pnt ); }
-	void			floatNoSwap( float& f )			{ return; }
+	void			floatNoSwap( float& f )			{ 	UNUSED_VARIABLE(f); }
 		
 	void			doubletSwap( double& d )		{ int *pnt = (int*)&d;	*pnt = l32Swap( *pnt ); }
-	void			doubleNoSwap( double& d )		{ return; }
+	void			doubleNoSwap( double& d )		{ UNUSED_VARIABLE(d); }
 }
 
 

@@ -23,7 +23,7 @@ void AnimatorComponent::Initialise(const AnimatorComponentCreate* pCreationData)
 {
 	if (pCreationData)
 	{
-		for (int i = 0; i < pCreationData->m_AnimationSet.GetItem()->m_Animations.size(); i++)
+		for (unsigned int i = 0; i < pCreationData->m_AnimationSet.GetItem()->m_Animations.size(); i++)
 		{
 			AssetManager* pAssetManager = AssetManager::Instance();
 			SpritesheetDef* pSpritesheetDef = pAssetManager->GetSpritesheetDef(pCreationData->m_AnimationSet.GetItem()->m_Animations[i].m_Spritesheet);
@@ -45,7 +45,7 @@ void AnimatorComponent::Update(float delta)
 
 void AnimatorComponent::SetVisible(bool visibility)
 {
-
+	UNUSED_VARIABLE(visibility);
 }
 
 void AnimatorComponent::AddAnimation(int animationId, const char* filename, std::vector<Rect>& frames, std::vector<Vector2>& origins, int fps, bool loop)
@@ -80,7 +80,7 @@ void AnimatorComponent::AddAnimationFromSpriteSheetDef(int animationId, Spritesh
 		//if this is a frame that we are looking for add it to the list
 		if (spriteName.compare(animationName) == 0)
 		{
-			Rect rect((*iter).m_PosX, (*iter).m_PosY, (*iter).m_Width, (*iter).m_Height);
+			Rect rect( (float)(*iter).m_PosX, (float)(*iter).m_PosY, (float)(*iter).m_Width, (float)(*iter).m_Height );
 			frames.push_back(rect);
 
 			Vector2 origin((*iter).m_PivotX * (*iter).m_Width, (*iter).m_PivotY * (*iter).m_Height);

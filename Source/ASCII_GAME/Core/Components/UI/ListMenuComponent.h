@@ -33,16 +33,16 @@ public:
 protected:
 
 	Vector2 GetAlignedPosition(const Vector2& position, int menuItemIndex) const;
-	int GetMenuItemLength(int index) const;
+	int GetMenuItemLength(unsigned int index) const;
 
 	std::vector<MenuItem> m_MenuItems;
 	Vector2 m_Position;
-	int m_SelectedItem;
+	unsigned int m_SelectedItem;
 	bool m_CircularMenu;
-	int m_MaxItemsToDisplay;
+	unsigned int m_MaxItemsToDisplay;
 
-	int m_DisplayStartIndex;
-	int m_DisplayEndIndex;
+	unsigned int m_DisplayStartIndex;
+	unsigned int m_DisplayEndIndex;
 
 	E_TextAlignmentType m_TextAlignment;
 };

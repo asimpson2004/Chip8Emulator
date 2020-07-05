@@ -28,7 +28,7 @@ void ListMenuComponent::Initialise()
 		m_CircularMenu = pListMenuComponentCreate->m_CircularMenu;
 		m_MaxItemsToDisplay = pListMenuComponentCreate->m_MaxItemsToDisplay;
 
-		for (int i = 0; i < pListMenuComponentCreate->m_MenuElements.size(); ++i)
+		for (unsigned int i = 0; i < pListMenuComponentCreate->m_MenuElements.size(); ++i)
 		{
 			MenuItem menuItem;
 			menuItem.m_DisplayText = pListMenuComponentCreate->m_MenuElements[i].m_DisplayText;
@@ -43,6 +43,8 @@ void ListMenuComponent::Initialise()
 
 void ListMenuComponent::Update(float delta)
 {
+	UNUSED_VARIABLE(delta);
+
 	InputDevice* pInputDevice = InputManager::Instance()->GetInputDevice();
 	if (pInputDevice)
 	{
@@ -123,25 +125,25 @@ void ListMenuComponent::Render(ASCIIRenderer* pRenderer)
 			CHAR_INFO pixel;
 			pixel.Attributes = BACKGROUND_BLACK | FOREGROUND_WHITE;
 			pixel.Char.UnicodeChar = '^';
-			pRenderer->SetPixel(currentTranslation.x, currentTranslation.y, &pixel, 100);
+			pRenderer->SetPixel((int)currentTranslation.x, (int)currentTranslation.y, &pixel, 100);
 		}
 		currentTranslation.y++;
 	}
 
-	for (int i = 0; i <= (m_MaxItemsToDisplay == 0 ? m_MenuItems.size()-1 : (m_DisplayEndIndex - m_DisplayStartIndex)); ++i)
+	for (unsigned int i = 0; i <= (m_MaxItemsToDisplay == 0 ? m_MenuItems.size()-1 : (m_DisplayEndIndex - m_DisplayStartIndex)); ++i)
 	{
 		int y = i; 
-		int itemIndex = m_DisplayStartIndex + i;
+		unsigned int itemIndex = m_DisplayStartIndex + i;
 
 		Vector2 alignedPosition = GetAlignedPosition(currentTranslation, itemIndex);
 
-		for (int x = 0; x < m_MenuItems[itemIndex].m_DisplayText.size(); ++x)
+		for (unsigned int x = 0; x < m_MenuItems[itemIndex].m_DisplayText.size(); ++x)
 		{
 			CHAR_INFO pixel;
 			pixel.Attributes = m_SelectedItem == itemIndex ? BACKGROUND_WHITE | FOREGROUND_BLACK : BACKGROUND_BLACK | FOREGROUND_WHITE;
 			pixel.Char.UnicodeChar = m_MenuItems[itemIndex].m_DisplayText[x];
 
-			pRenderer->SetPixel(alignedPosition.x + x, alignedPosition.y + y, &pixel, 100);
+			pRenderer->SetPixel((int)alignedPosition.x + x, (int)alignedPosition.y + y, &pixel, 100);
 		}
 
 	}
@@ -153,7 +155,7 @@ void ListMenuComponent::Render(ASCIIRenderer* pRenderer)
 			CHAR_INFO pixel;
 			pixel.Attributes = BACKGROUND_BLACK | FOREGROUND_WHITE;
 			pixel.Char.UnicodeChar = 'v';
-			pRenderer->SetPixel(currentTranslation.x, currentTranslation.y + m_MaxItemsToDisplay, &pixel, 100);
+			pRenderer->SetPixel((int)currentTranslation.x, (int)currentTranslation.y + m_MaxItemsToDisplay, &pixel, 100);
 		}
 	}
 
@@ -162,7 +164,7 @@ void ListMenuComponent::Render(ASCIIRenderer* pRenderer)
 
 void ListMenuComponent::OnMessage(Message* pMessage)
 {
-
+	UNUSED_VARIABLE(pMessage);
 }
 
 Vector2 ListMenuComponent::GetAlignedPosition(const Vector2& position, int menuItemIndex) const
@@ -193,7 +195,7 @@ Vector2 ListMenuComponent::GetAlignedPosition(const Vector2& position, int menuI
 	return alignedPosition;
 }
 
-int ListMenuComponent::GetMenuItemLength(int index) const
+int ListMenuComponent::GetMenuItemLength(unsigned int index) const
 {
 	int menuItemLength = 0;
 

@@ -29,11 +29,11 @@ void KeyboardAndMouseInputDevice::ProcessInputs()
 
 	DWORD numEventsRead = 0;
 
-	for (int i = 0; i < numInputEvents; i += numEventsRead)
+	for (unsigned int i = 0; i < numInputEvents; i += numEventsRead)
 	{
 		ReadConsoleInput(hConsoleInput, inputData, 48, &numEventsRead);
 
-		for (int j = 0; j < numEventsRead; ++j)
+		for (unsigned int j = 0; j < numEventsRead; ++j)
 		{
 			switch (inputData[j].EventType)
 			{

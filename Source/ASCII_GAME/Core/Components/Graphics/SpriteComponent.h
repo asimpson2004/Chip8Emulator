@@ -26,10 +26,10 @@ private:
 
 	void Initialise(const int* pixels, const Vector2& size);
 	void Initialise(const CHAR_INFO* pixels, const Vector2& size);
-	void Initialise(const char* pixels, int attributes, const Vector2& size);
+	void Initialise(const char* pixels, WORD attributes, const Vector2& size);
 	void Initialise(const char* filename);
 
-	void SetPosition(int x, int y) { m_Position.x = x; m_Position.y = y; }
+	void SetPosition(float x, float y) { m_Position.x = x; m_Position.y = y; }
 	void SetPosition(Vector2& position) { m_Position = position; }
 
 	Vector2 GetPosition() { return m_Position; }
@@ -42,8 +42,8 @@ private:
 	int GetWrappedTextureX(int xPos);
 	int GetWrappedTextureY(int yPos);
 
-	char GetLayer() { return m_Layer;}
-	void SetLayer(char layer) { m_Layer = layer; }
+	int GetLayer() { return m_Layer;}
+	void SetLayer(int layer) { m_Layer = layer; }
 
 	void Cleanup();
 
@@ -58,7 +58,7 @@ private:
 	CHAR_INFO** m_PixelData;
 	AsciiTexture* m_pTexture;
 
-	char m_Layer;
+	int m_Layer;
 
 	unsigned int m_FilenameHashValue;
 

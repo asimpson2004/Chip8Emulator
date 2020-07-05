@@ -15,13 +15,13 @@ public:
 	ASCIIRenderer();
 	~ASCIIRenderer();
 
-	void Initialise(int width, int height);
-	void InitialisePixelSize(int size);
+	void Initialise(short width, short height);
+	void InitialisePixelSize(SHORT size);
 
 	void Render();
 	void RenderAsync();
 
-	void SetPixel(int x, int y, const CHAR_INFO* pPixelData, const char layer = 0);
+	void SetPixel(int x, int y, const CHAR_INFO* pPixelData, const int layer = 0);
 	void ClearScreen(WORD clearColour = BACKGROUND_BLACK);	
 
 	void PushMatrix();
@@ -42,15 +42,15 @@ private:
 	int m_BackBufferIndex;
 	int m_FrontBufferIndex;
 
-	bool SetWindow(int width, int height);
+	bool SetWindow(short width, short height);
 
-	int DetectBestFontSize(int width, int height);
+	SHORT DetectBestFontSize(short width, short height);
 	
 	HANDLE m_hConsole;
 	HANDLE m_hConsoleInput;
 
 	CHAR_INFO* m_ScreenData[2];
-	char* m_DepthBuffer[2];
+	int* m_DepthBuffer[2];
 
 	std::mutex bufferLock;
 	std::thread m_RenderThread;

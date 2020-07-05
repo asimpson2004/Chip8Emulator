@@ -32,7 +32,7 @@ SpriteComponent::SpriteComponent(const SpriteComponentCreate* pCreationData, Gam
 	const SpriteComponentTextCreate* pSpriteTextCreate = dynamic_cast<const SpriteComponentTextCreate*>(pCreationData);
 	if (pSpriteTextCreate)
 	{
-		Initialise(pSpriteTextCreate->m_Pixels, pSpriteTextCreate->m_SpriteColour, Vector2(pSpriteTextCreate->m_SpriteSize.x, pSpriteTextCreate->m_SpriteSize.y));
+		Initialise(pSpriteTextCreate->m_Pixels, (WORD)pSpriteTextCreate->m_SpriteColour, Vector2(pSpriteTextCreate->m_SpriteSize.x, pSpriteTextCreate->m_SpriteSize.y));
 		return;
 	}
 
@@ -76,20 +76,20 @@ void SpriteComponent::Initialise(const int* pixels, const Vector2& size)
 
 	m_Size = size;
 
-	m_PixelData = new CHAR_INFO * [m_Size.y];
+	m_PixelData = new CHAR_INFO * [(unsigned int)m_Size.y];
 
 	for (int i = 0; i < m_Size.y; i++)
 	{
-		m_PixelData[i] = new CHAR_INFO[m_Size.x];
+		m_PixelData[i] = new CHAR_INFO[(unsigned int)m_Size.x];
 	}
 
-	for (int y = 0; y < m_Size.y; y++)
+	for (unsigned int y = 0; y < (unsigned int)m_Size.y; y++)
 	{
-		for (int x = 0; x < m_Size.x; x++)
+		for (unsigned int x = 0; x < (unsigned int)m_Size.x; x++)
 		{
 			m_PixelData[y][x].Char.UnicodeChar = 0;
 			m_PixelData[y][x].Char.AsciiChar = 0;
-			m_PixelData[y][x].Attributes = pixels[x + (y * (int)m_Size.x)];
+			m_PixelData[y][x].Attributes = (WORD)pixels[x + (y * (unsigned int)m_Size.x)];
 		}
 	}
 
@@ -103,44 +103,44 @@ void SpriteComponent::Initialise(const CHAR_INFO* pixels, const Vector2& size)
 
 	m_Size = size;
 
-	m_PixelData = new CHAR_INFO * [m_Size.y];
+	m_PixelData = new CHAR_INFO * [(unsigned int)m_Size.y];
 
-	for (int i = 0; i < m_Size.y; i++)
+	for (unsigned int i = 0; i < (unsigned int)m_Size.y; i++)
 	{
-		m_PixelData[i] = new CHAR_INFO[m_Size.x];
+		m_PixelData[i] = new CHAR_INFO[(unsigned int)m_Size.x];
 	}
 
-	for (int y = 0; y < m_Size.y; y++)
+	for (unsigned int y = 0; y < (unsigned int)m_Size.y; y++)
 	{
-		for (int x = 0; x < m_Size.x; x++)
+		for (unsigned int x = 0; x < (unsigned int)m_Size.x; x++)
 		{
-			m_PixelData[y][x] = pixels[x + (y * (int)m_Size.x)];
+			m_PixelData[y][x] = pixels[x + (y * (unsigned int)m_Size.x)];
 		}
 	}
 
 	m_bInitialised = true;
 }
 
-void SpriteComponent::Initialise(const char* pixels, int attributes, const Vector2& size)
+void SpriteComponent::Initialise(const char* pixels, WORD attributes, const Vector2& size)
 {
 	if (m_bInitialised)
 		return;
 
 	m_Size = size;
 
-	m_PixelData = new CHAR_INFO * [m_Size.y];
+	m_PixelData = new CHAR_INFO * [(unsigned int)m_Size.y];
 
-	for (int i = 0; i < m_Size.y; i++)
+	for (unsigned int i = 0; i < (unsigned int)m_Size.y; i++)
 	{
-		m_PixelData[i] = new CHAR_INFO[m_Size.x];
+		m_PixelData[i] = new CHAR_INFO[(unsigned int)m_Size.x];
 	}
 
-	for (int y = 0; y < m_Size.y; y++)
+	for (unsigned int y = 0; y < (unsigned int)m_Size.y; y++)
 	{
-		for (int x = 0; x < m_Size.x; x++)
+		for (unsigned int x = 0; x < (unsigned int)m_Size.x; x++)
 		{
 			m_PixelData[y][x].Char.UnicodeChar = 0;
-			m_PixelData[y][x].Char.AsciiChar = pixels[x + (y * (int)m_Size.x)];
+			m_PixelData[y][x].Char.AsciiChar = pixels[x + (y * (unsigned int)m_Size.x)];
 			m_PixelData[y][x].Attributes = attributes;
 		}
 	}
@@ -155,7 +155,8 @@ void SpriteComponent::Initialise(const char* filename)
 
 	m_pTexture = AssetManager::Instance()->GetAsciiTexture(filename);
 	if (m_pTexture) {
-		SetTextureRect(Rect(0.0f, 0.0f, m_pTexture->GetSize().x, m_pTexture->GetSize().y));
+		Rect textureRect(0.0f, 0.0f, m_pTexture->GetSize().x, m_pTexture->GetSize().y);
+		SetTextureRect(textureRect);
 	}
 	
 	m_bInitialised = true;
@@ -184,9 +185,9 @@ void SpriteComponent::Render(ASCIIRenderer* pRenderer)
 		{
 			for (int x = 0; x < m_TextureRect.w; x++)
 			{
-				int posx = currentTranslation.x + x;
-				int posy = currentTranslation.y + y;
-				const AsciiPixel& pixel = m_pTexture->GetPixelAtPosition(GetWrappedTextureX(m_TextureRect.x + x), GetWrappedTextureY(m_TextureRect.y + y));
+				int posx = (int)currentTranslation.x + x;
+				int posy = (int)currentTranslation.y + y;
+				const AsciiPixel& pixel = m_pTexture->GetPixelAtPosition(GetWrappedTextureX((int)m_TextureRect.x + x), GetWrappedTextureY((int)m_TextureRect.y + y));
 				if (pixel.a > 0)
 				{
 					pRenderer->SetPixel(posx, posy, &pixel.rgb, m_Layer);

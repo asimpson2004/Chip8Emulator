@@ -498,18 +498,18 @@ void AsciiTexture::LoadFromTexture(const ImageFile* pTexture)
 {
 	if (pTexture)
 	{
-		m_Size.x = pTexture->width * 2;
-		m_Size.y = pTexture->height;
+		m_Size.x = (float)pTexture->width * 2.0f; //*2 so the images come out square on console window
+		m_Size.y = (float)pTexture->height;
 
-		m_Buffer = new AsciiPixel* [m_Size.y];
+		m_Buffer = new AsciiPixel* [(unsigned int)m_Size.y];
 
-		for (int y = 0; y < m_Size.y; y++)
+		for (unsigned int y = 0; y < (unsigned int)m_Size.y; y++)
 		{
-			m_Buffer[y] = new AsciiPixel[m_Size.x];
+			m_Buffer[y] = new AsciiPixel[(unsigned int)m_Size.x];
 
-			for (int x = 0; x < pTexture->width; x++)
+			for (unsigned int x = 0; x < (unsigned int)pTexture->width; x++)
 			{
-				int startPos = x * 4 + (y * 4 * pTexture->width);
+				int startPos = x * 4 + (y * 4 * (unsigned int)pTexture->width);
 				unsigned char r = pTexture->buffer[startPos];
 				unsigned char g = pTexture->buffer[startPos + 1];
 				unsigned char b = pTexture->buffer[startPos + 2];
@@ -517,15 +517,11 @@ void AsciiTexture::LoadFromTexture(const ImageFile* pTexture)
 				unsigned short colour = 0;
 				WCHAR letter = ' ';
 
-				//r = 64;
-				//g = 0;
-				//b = 0;
-
 				int index = 0;
 
 				Vector3 pixelColour(r, g, b);
 				float currentDistance = FLT_MAX;
-				for (int i = 0; i < 125; i++) // 16
+				for (unsigned int i = 0; i < 125; i++) // 16
 				{
 					float distToColour = pixelColour.distanceSquared(colours[i]);
 					if (distToColour < currentDistance)
@@ -539,69 +535,7 @@ void AsciiTexture::LoadFromTexture(const ImageFile* pTexture)
 				
 
 				letter = index >= 36 ? 177 : index >= 16 ? 176 : ' ';
-				//colour = BACKGROUND_WHITE | FOREGROUND_YELLOW;
 
-				//>= 16
-				//letter = 176; //low
-				//>=36
-				//letter = 177; //medium
-				//letter = 178; //high
-
-
-				int z = 0;
-
-				/*
-				if (r >= 240)
-				{
-					colour |= BACKGROUND_BRIGHT_RED;
-				}
-				else if (r >= 127) {
-					colour |= BACKGROUND_RED;
-					colour |= FOREGROUND_BRIGHT_RED;
-				}
-				else if (r >= 80) {
-					colour |= BACKGROUND_RED;
-					colour |= FOREGROUND_RED;
-				}
-				else if (r >= 30) {
-					colour |= BACKGROUND_RED;
-				}
-
-				if (g >= 240)
-				{
-					colour |= BACKGROUND_BRIGHT_GREEN;
-					if (r >= 30 || b >= 30) {
-					}
-				}
-				else if (g >= 127) {
-					colour |= BACKGROUND_GREEN;
-					colour |= FOREGROUND_BRIGHT_GREEN;
-				}
-				else if (g >= 80) {
-					colour |= BACKGROUND_GREEN;
-					colour |= FOREGROUND_GREEN;
-				}
-				else if (g >= 30) {
-					colour |= BACKGROUND_GREEN;
-				}
-
-				if (b >= 240)
-				{
-					colour |= BACKGROUND_BRIGHT_BLUE;
-				}
-				else if (b >= 127) {
-					colour |= BACKGROUND_BLUE;
-					colour |= FOREGROUND_BRIGHT_BLUE;
-				}
-				else if (b >= 80) {
-					colour |= BACKGROUND_BLUE;
-					colour |= FOREGROUND_BLUE;
-				}
-				else if (b >= 30) {
-					colour |= BACKGROUND_BLUE;
-				}
-				*/
-				//colour = colours[(x%16)];
 				int xpos = x * 2;
 				m_Buffer[y][xpos].rgb = CHAR_INFO{ letter, colour };
 				m_Buffer[y][xpos].a = a;

@@ -13,16 +13,19 @@ void SpriteComponentCreate::InitialiseFromBinary(char*& buffer)
 void SpriteComponentTextCreate::InitialiseFromBinary(char*& buffer)
 {
 	//do later
+	UNUSED_VARIABLE(buffer);
 }
 
 void SpriteComponentCharInfoCreate::InitialiseFromBinary(char*& buffer)
 {
 	//do later
+	UNUSED_VARIABLE(buffer);
 }
 
 void SpriteComponentIntCreate::InitialiseFromBinary(char*& buffer)
 {
 	//do later
+	UNUSED_VARIABLE(buffer);
 }
 
 void SpriteComponentFileCreate::InitialiseFromBinary(char*& buffer)

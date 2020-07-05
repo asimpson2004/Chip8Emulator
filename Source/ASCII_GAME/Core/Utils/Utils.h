@@ -9,9 +9,11 @@
 #define SAFE_DELETE_PTR(ptr){ if(ptr){ delete ptr; ptr = nullptr; } }
 #define SAFE_DELETE_ARY(ptr){ if(ptr){ delete[] ptr; ptr = nullptr; } }
 
+#define UNUSED_VARIABLE(param) param
+
 namespace debug
 {
-    static void log(const char* szFormat, ...)
+    inline void log(const char* szFormat, ...)
     {
         char szBuff[1024];
         va_list arg;

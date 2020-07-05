@@ -11,7 +11,7 @@
 #include "../ComponentType.h"
 
 class GameObject;
-class SpritesheetDef;
+struct SpritesheetDef;
 class AnimatorComponentCreate;
 
 struct Animation
@@ -29,7 +29,7 @@ struct Animation
 	}
 
 	const char* m_Filename;
-	int m_CurrentFrame;
+	unsigned int m_CurrentFrame;
 	int m_fps;
 	std::vector<Rect> m_Frames;
 	std::vector<Vector2> m_Origins;
